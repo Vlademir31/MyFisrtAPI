@@ -1,3 +1,5 @@
+using MyFirstAPI.Model;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,43 +8,33 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
-app.UseHttpsRedirection();
-
 app.MapGet("/", () => "Minha primeira Web API está funcionado");
 
-app.MapGet("/ola/{nome}", (string nome) =>
+
+//cria uma lista 
+var clientes = new List<Cliente>
 {
-    return $"Olá, {nome}!";
+    new Cliente
+    {
+        Id = 1,
+        Nome = "Vlademir",
+        Email = "vlade@email.com"
+    },
+
+    new Cliente
+    {
+        Id = 2,
+        Nome = "Maria",
+        Email = "maria@email.com"
+    }
+};
+//Foi alocado abaixo pq primeiro foi criado a lista /clientes
+//que o endpoint /clientes precisa utilizar
+app.MapGet("/clientes", () =>
+{
+    return clientes;
 });
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () => 
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
