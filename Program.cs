@@ -37,15 +37,17 @@ app.MapGet("/clientes/{id}", (int id) =>
     return cliente;
 });
 
+var proximoId = 3;
+
 app.MapPost("/clientes", (Cliente cliente) =>
 {
+    cliente.Id = proximoId;
+    proximoId ++;
+    
     clientes.Add(cliente);
 
     return cliente;
 });
-
-//Foi alocado abaixo pq primeiro foi criado a lista /clientes
-//que o endpoint /clientes precisa utilizar
 
 app.MapGet("/clientes", () =>
 {
