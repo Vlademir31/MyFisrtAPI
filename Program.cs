@@ -16,6 +16,11 @@ app.UseHttpsRedirection();
 
 app.MapGet("/", () => "Minha primeira Web API está funcionado");
 
+app.MapGet("/ola/{nome}", (string nome) =>
+{
+    return $"Olá, {nome}!";
+});
+
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
