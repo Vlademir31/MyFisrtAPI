@@ -11,7 +11,8 @@ var app = builder.Build();
 app.MapGet("/", () => "Minha primeira Web API está funcionado");
 
 
-//cria uma lista 
+//cria uma lista já preenchida
+
 var clientes = new List<Cliente>
 {
     new Cliente
@@ -28,8 +29,24 @@ var clientes = new List<Cliente>
         Email = "maria@email.com"
     }
 };
+
+app.MapGet("/clientes/{id}", (int id) =>
+{
+    var cliente = clientes.FirstOrDefault(cliente => cliente.Id == id);
+
+    return cliente;
+});
+
+app.MapPost("/clientes", (Cliente cliente) =>
+{
+    clientes.Add(cliente);
+
+    return cliente;
+});
+
 //Foi alocado abaixo pq primeiro foi criado a lista /clientes
 //que o endpoint /clientes precisa utilizar
+
 app.MapGet("/clientes", () =>
 {
     return clientes;
