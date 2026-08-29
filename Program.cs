@@ -43,10 +43,38 @@ app.MapPost("/clientes", (Cliente cliente) =>
 {
     cliente.Id = proximoId;
     proximoId ++;
-    
+
     clientes.Add(cliente);
 
     return cliente;
+});
+
+app.MapPut("/clientes/{id}", (int id, Cliente clienteAtualizado) =>
+{
+    var cliente = clientes.FirstOrDefault(cliente => cliente.Id == id);
+    if (cliente == null)
+    {
+        return Results.NotFound();
+    }
+
+    cliente.Nome = clienteAtualizado.Nome;
+    cliente.Email = clienteAtualizado.Email;
+
+    return Results.Ok(cliente);
+});
+
+app.MapDelete("/clientes/{id}", (int id) =>
+{
+   var cliente = clientes.FirstOrDefault(cliente => cliente.Id == id);
+
+   if (cliente == null)
+    {
+        return Results.NotFound();
+    }
+
+    clientes.Remove (cliente);
+
+    return Results.NoContent();
 });
 
 app.MapGet("/clientes", () =>
