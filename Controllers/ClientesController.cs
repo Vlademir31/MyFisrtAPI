@@ -23,11 +23,27 @@ namespace MyFirstAPI.Controllers
         Email = "maria@email.com"
     }
 };
-
- [HttpGet]
- public List<Cliente> ObterTodos()
+        [HttpGet]
+        public List<Cliente> ObterTodos()
         {
             return clientes;
+        }
 
+        [HttpGet]
+        [Route("{id}")]
+        public Cliente? ObterPorId([FromRoute] int id)
+        {
+            Cliente? resultado = null;
+
+            foreach (var cliente in clientes)
+            {
+                if (cliente.Id == id)
+                {
+                    resultado = cliente;
+                    break;
+                }
+            }
+            return resultado;
+        }
     }
 }
