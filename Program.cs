@@ -34,7 +34,12 @@ app.MapGet("/clientes/{id}", (int id) =>
 {
     var cliente = clientes.FirstOrDefault(cliente => cliente.Id == id);
 
-    return cliente;
+    if (cliente == null)
+    {
+        return Results.NotFound();
+    }
+
+    return Results.Ok(cliente);
 });
 
 var proximoId = 3;
@@ -46,12 +51,13 @@ app.MapPost("/clientes", (Cliente cliente) =>
 
     clientes.Add(cliente);
 
-    return cliente;
+    return Results.Created($"/clientes/{cliente.Id}", cliente);
 });
 
 app.MapPut("/clientes/{id}", (int id, Cliente clienteAtualizado) =>
 {
     var cliente = clientes.FirstOrDefault(cliente => cliente.Id == id);
+
     if (cliente == null)
     {
         return Results.NotFound();
