@@ -1,92 +1,25 @@
-using MyFirstAPI.Model;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
+builder.Services.AddControllers();
+
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Minha primeira Web API está funcionado");
+app.MapOpenApi();
 
-
-//cria uma lista já preenchida
-
-var clientes = new List<Cliente>
+app.UseSwaggerUI( options =>
 {
-    new Cliente
-    {
-        Id = 1,
-        Nome = "Vlademir",
-        Email = "vlade@email.com"
-    },
-
-    new Cliente
-    {
-        Id = 2,
-        Nome = "Maria",
-        Email = "maria@email.com"
-    }
-};
-
-app.MapGet("/clientes/{id}", (int id) =>
-{
-    var cliente = clientes.FirstOrDefault(cliente => cliente.Id == id);
-
-    if (cliente == null)
-    {
-        return Results.NotFound();
-    }
-
-    return Results.Ok(cliente);
+    options.SwaggerEndpoint("/openapi/v1.json", "API v1");
 });
 
-var proximoId = 3;
+app.MapControllers();
 
-app.MapPost("/clientes", (Cliente cliente) =>
-{
-    cliente.Id = proximoId;
-    proximoId ++;
+app.MapGet("/", () => "Minha primeira Web API está funcionando");
 
-    clientes.Add(cliente);
-
-    return Results.Created($"/clientes/{cliente.Id}", cliente);
-});
-
-app.MapPut("/clientes/{id}", (int id, Cliente clienteAtualizado) =>
-{
-    var cliente = clientes.FirstOrDefault(cliente => cliente.Id == id);
-
-    if (cliente == null)
-    {
-        return Results.NotFound();
-    }
-
-    cliente.Nome = clienteAtualizado.Nome;
-    cliente.Email = clienteAtualizado.Email;
-
-    return Results.Ok(cliente);
-});
-
-app.MapDelete("/clientes/{id}", (int id) =>
-{
-   var cliente = clientes.FirstOrDefault(cliente => cliente.Id == id);
-
-   if (cliente == null)
-    {
-        return Results.NotFound();
-    }
-
-    clientes.Remove (cliente);
-
-    return Results.NoContent();
-});
-
-app.MapGet("/clientes", () =>
-{
-    return clientes;
-});
 
 
 app.Run();

@@ -28,8 +28,6 @@ namespace MyFirstAPI.Controllers
  public List<Cliente> ObterTodos()
         {
             return clientes;
-        }
 
-        
     }
 }
