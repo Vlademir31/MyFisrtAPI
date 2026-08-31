@@ -45,5 +45,12 @@ namespace MyFirstAPI.Controllers
             }
             return resultado;
         }
+        [HttpPost]
+        public string Criar([FromBody] Cliente cliente)
+        {
+            clientes.Add(cliente);
+
+            return "cliente cadastrado";
+        }
     }
 }
