@@ -23,6 +23,8 @@ namespace MyFirstAPI.Controllers
         Email = "maria@email.com"
     }
 };
+private static int proximoId = 3;
+
         [HttpGet]
         public List<Cliente> ObterTodos()
         {
@@ -46,11 +48,15 @@ namespace MyFirstAPI.Controllers
             return resultado;
         }
         [HttpPost]
-        public string Criar([FromBody] Cliente cliente)
+        public Cliente Criar([FromBody] Cliente cliente)
         {
+            cliente.Id = proximoId;
+
+            proximoId++;
+
             clientes.Add(cliente);
 
-            return "cliente cadastrado";
+            return cliente;
         }
         [HttpPut]
         [Route("{id}")]
@@ -67,6 +73,21 @@ namespace MyFirstAPI.Controllers
             selecionado.Email = clienteAtualizado.Email;
 
             return "Cliente ataulizado";
+        }
+        [HttpDelete]
+        [Route("{id}")]
+        public string? Deletar ([FromRoute] int id)
+        {
+            Cliente? cliente = ObterPorId(id);
+
+            if (cliente == null)
+            {
+                return "Cliente não encontrado";
+            }
+
+            clientes.Remove(cliente);
+
+            return "Cliente removido";
         }
     }
 }
