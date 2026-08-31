@@ -72,7 +72,7 @@ private static int proximoId = 3;
             selecionado.Nome = clienteAtualizado.Nome;
             selecionado.Email = clienteAtualizado.Email;
 
-            return "Cliente ataulizado";
+            return "Cliente atualizado";
         }
         [HttpDelete]
         [Route("{id}")]
