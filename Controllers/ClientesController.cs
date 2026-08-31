@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MyFirstAPI.Model;
+using MyFirstAPI.Repository;
 
 namespace MyFirstAPI.Controllers
 {
@@ -7,57 +8,28 @@ namespace MyFirstAPI.Controllers
     [Route("clientes")]
     public class ClientesController
     {
-        private static List<Cliente> clientes = new List<Cliente>
-       {
-        new Cliente
-            {
-        Id = 1,
-        Nome = "Vlademir",
-        Email = "vlade@email.com"
-    },
-
-    new Cliente
-    {
-        Id = 2,
-        Nome = "Maria",
-        Email = "maria@email.com"
-    }
-};
-private static int proximoId = 3;
+        private readonly ClienteRepository repository = new ClienteRepository();
 
         [HttpGet]
         public List<Cliente> ObterTodos()
         {
-            return clientes;
+            return repository.ObterTodos();
         }
 
         [HttpGet]
         [Route("{id}")]
         public Cliente? ObterPorId([FromRoute] int id)
         {
-            Cliente? resultado = null;
-
-            foreach (var cliente in clientes)
-            {
-                if (cliente.Id == id)
-                {
-                    resultado = cliente;
-                    break;
-                }
-            }
-            return resultado;
+            
+            return repository.ObterPorId(id);
         }
+
         [HttpPost]
         public Cliente Criar([FromBody] Cliente cliente)
         {
-            cliente.Id = proximoId;
-
-            proximoId++;
-
-            clientes.Add(cliente);
-
-            return cliente;
+            return repository.Adicionar(cliente);
         }
+
         [HttpPut]
         [Route("{id}")]
         public string? Atualizar( [FromRoute] int id, [FromBody] Cliente clienteAtualizado)
@@ -78,14 +50,12 @@ private static int proximoId = 3;
         [Route("{id}")]
         public string? Deletar ([FromRoute] int id)
         {
-            Cliente? cliente = ObterPorId(id);
+            bool removido = repository.Remover(id);
 
-            if (cliente == null)
+            if (!removido)
             {
                 return "Cliente não encontrado";
             }
-
-            clientes.Remove(cliente);
 
             return "Cliente removido";
         }
