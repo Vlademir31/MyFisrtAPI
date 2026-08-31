@@ -50,6 +50,20 @@ namespace MyFirstAPI.Repository
 
             return cliente;
         }
+        public bool Atualizar (int id, Cliente clienteAtualizado)
+        {
+            Cliente? cliente = ObterPorId(id);
+
+            if (cliente == null)
+            {
+                return false;
+            }
+
+            cliente.Nome = clienteAtualizado.Nome;
+            cliente.Email = clienteAtualizado.Email;
+
+            return true;
+        }
 
 
         public bool Remover(int id)

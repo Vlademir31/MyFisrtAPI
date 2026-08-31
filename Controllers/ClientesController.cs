@@ -32,23 +32,20 @@ namespace MyFirstAPI.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public string? Atualizar( [FromRoute] int id, [FromBody] Cliente clienteAtualizado)
+        public string Atualizar( [FromRoute] int id, [FromBody] Cliente clienteAtualizado)
         {
-            Cliente? selecionado = ObterPorId(id);
+            bool atualizado = repository.Atualizar(id, clienteAtualizado);
 
-            if (selecionado == null)
+            if (!atualizado)
             {
                 return "Cliente não encontrado";
             }
 
-            selecionado.Nome = clienteAtualizado.Nome;
-            selecionado.Email = clienteAtualizado.Email;
-
-            return "Cliente atualizado";
+            return "cliente atualizado";
         }
         [HttpDelete]
         [Route("{id}")]
-        public string? Deletar ([FromRoute] int id)
+        public string Deletar ([FromRoute] int id)
         {
             bool removido = repository.Remover(id);
 
