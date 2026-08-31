@@ -52,5 +52,21 @@ namespace MyFirstAPI.Controllers
 
             return "cliente cadastrado";
         }
+        [HttpPut]
+        [Route("{id}")]
+        public string? Atualizar( [FromRoute] int id, [FromBody] Cliente clienteAtualizado)
+        {
+            Cliente? selecionado = ObterPorId(id);
+
+            if (selecionado == null)
+            {
+                return "Cliente não encontrado";
+            }
+
+            selecionado.Nome = clienteAtualizado.Nome;
+            selecionado.Email = clienteAtualizado.Email;
+
+            return "Cliente ataulizado";
+        }
     }
 }
