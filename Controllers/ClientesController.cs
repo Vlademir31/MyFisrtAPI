@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MyFirstAPI.Model;
-using MyFirstAPI.Repository;
+using MyFirstAPI.Services;
 
 namespace MyFirstAPI.Controllers
 {
@@ -8,12 +8,12 @@ namespace MyFirstAPI.Controllers
     [Route("clientes")]
     public class ClientesController
     {
-        private readonly ClienteRepository repository = new ClienteRepository();
+        private readonly ClienteService clienteService = new ClienteService();
 
         [HttpGet]
         public List<Cliente> ObterTodos()
         {
-            return repository.ObterTodos();
+            return clienteService.ObterTodos();
         }
 
         [HttpGet]
@@ -21,20 +21,20 @@ namespace MyFirstAPI.Controllers
         public Cliente? ObterPorId([FromRoute] int id)
         {
             
-            return repository.ObterPorId(id);
+            return clienteService.ObterPorId(id);
         }
 
         [HttpPost]
         public Cliente Criar([FromBody] Cliente cliente)
         {
-            return repository.Adicionar(cliente);
+            return clienteService.Adicionar(cliente);
         }
 
         [HttpPut]
         [Route("{id}")]
         public string Atualizar( [FromRoute] int id, [FromBody] Cliente clienteAtualizado)
         {
-            bool atualizado = repository.Atualizar(id, clienteAtualizado);
+            bool atualizado = clienteService.Atualizar(id, clienteAtualizado);
 
             if (!atualizado)
             {
@@ -47,7 +47,7 @@ namespace MyFirstAPI.Controllers
         [Route("{id}")]
         public string Deletar ([FromRoute] int id)
         {
-            bool removido = repository.Remover(id);
+            bool removido = clienteService.Deletar(id);
 
             if (!removido)
             {
