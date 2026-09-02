@@ -6,7 +6,7 @@ namespace MyFirstAPI.Controllers
 {
     [ApiController]
     [Route("clientes")]
-    public class ClientesController
+    public class ClientesController : Controller
     {
         private readonly ClienteService clienteService = new ClienteService();
 
@@ -18,16 +18,24 @@ namespace MyFirstAPI.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public Cliente? ObterPorId([FromRoute] int id)
+        public IActionResult ObterPorId([FromRoute] int id)
         {
             
-            return clienteService.ObterPorId(id);
+            Cliente? cliente = clienteService.ObterPorId(id);
+
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+
+            return Ok (cliente);
         }
 
         [HttpPost]
-        public Cliente Criar([FromBody] Cliente cliente)
+        public IActionResult Criar([FromBody] Cliente cliente)
         {
-            return clienteService.Adicionar(cliente);
+            Cliente novoCliente = clienteService.Adicionar(cliente);
+            return Created("", cliente);
         }
 
         [HttpPut]
