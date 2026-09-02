@@ -1,12 +1,12 @@
 using MyFirstAPI.Model;
-using MyFirstAPI.Repository;
+using MyFirstAPI.Interfaces;
 
 namespace MyFirstAPI.Services
 {
     public class ClienteService
     {
-        private readonly ClienteRepository repository;
-        public ClienteService(ClienteRepository repository)
+        private readonly IClienteRepository repository;
+        public ClienteService(IClienteRepository repository)
         {
             this.repository = repository;
         }

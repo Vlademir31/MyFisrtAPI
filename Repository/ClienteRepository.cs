@@ -3,7 +3,7 @@ using MyFirstAPI.Interfaces;
 
 namespace MyFirstAPI.Repository
 {
-    public class ClienteRepository
+    public class ClienteRepository : IClienteRepository 
     {
 
         private static List<Cliente> clientes = new List<Cliente>

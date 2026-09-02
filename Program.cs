@@ -1,5 +1,6 @@
 using MyFirstAPI.Repository;
 using MyFirstAPI.Services;
+using MyFirstAPI.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddSingleton<ClienteRepository>();
+builder.Services.AddSingleton<IClienteRepository, ClienteRepository>();
 
 builder.Services.AddSingleton<ClienteService>();
 
