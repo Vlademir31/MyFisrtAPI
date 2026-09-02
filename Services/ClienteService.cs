@@ -5,7 +5,11 @@ namespace MyFirstAPI.Services
 {
     public class ClienteService
     {
-        private readonly ClienteRepository repository = new ClienteRepository();
+        private readonly ClienteRepository repository;
+        public ClienteService(ClienteRepository repository)
+        {
+            this.repository = repository;
+        }
         public List<Cliente> ObterTodos()
         {
             return repository.ObterTodos();

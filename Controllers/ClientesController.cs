@@ -8,7 +8,11 @@ namespace MyFirstAPI.Controllers
     [Route("clientes")]
     public class ClientesController : Controller
     {
-        private readonly ClienteService clienteService = new ClienteService();
+        private readonly ClienteService clienteService;
+        public ClientesController(ClienteService clienteService)
+        {
+            this.clienteService = clienteService;
+        }
 
         [HttpGet]
         public List<Cliente> ObterTodos()
@@ -35,7 +39,7 @@ namespace MyFirstAPI.Controllers
         public IActionResult Criar([FromBody] Cliente cliente)
         {
             Cliente novoCliente = clienteService.Adicionar(cliente);
-            return Created("", cliente);
+            return Created("", novoCliente);
         }
 
         [HttpPut]
