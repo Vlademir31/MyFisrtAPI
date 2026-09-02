@@ -1,4 +1,5 @@
 using MyFirstAPI.Model;
+using MyFirstAPI.Interfaces;
 
 namespace MyFirstAPI.Repository
 {
