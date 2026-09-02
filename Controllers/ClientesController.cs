@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MyFirstAPI.Model;
-using MyFirstAPI.Services;
+using MyFirstAPI.Interfaces;
 
 namespace MyFirstAPI.Controllers
 {
@@ -8,16 +8,16 @@ namespace MyFirstAPI.Controllers
     [Route("clientes")]
     public class ClientesController : Controller
     {
-        private readonly ClienteService clienteService;
-        public ClientesController(ClienteService clienteService)
+        private readonly IClienteService clienteService;
+        public ClientesController(IClienteService clienteService)
         {
             this.clienteService = clienteService;
         }
 
         [HttpGet]
-        public List<Cliente> ObterTodos()
+        public IActionResult ObterTodos()
         {
-            return clienteService.ObterTodos();
+            return Ok (clienteService.ObterTodos());
         }
 
         [HttpGet]
@@ -44,29 +44,29 @@ namespace MyFirstAPI.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public string Atualizar( [FromRoute] int id, [FromBody] Cliente clienteAtualizado)
+        public IActionResult Atualizar( [FromRoute] int id, [FromBody] Cliente clienteAtualizado)
         {
-            bool atualizado = clienteService.Atualizar(id, clienteAtualizado);
+            bool atualizado = clienteService.Atualizar(clienteAtualizado);
 
             if (!atualizado)
             {
-                return "Cliente não encontrado";
+                return NotFound();
             }
 
-            return "cliente atualizado";
+            return Ok("cliente atualizado");
         }
         [HttpDelete]
         [Route("{id}")]
-        public string Deletar ([FromRoute] int id)
+        public IActionResult Deletar ([FromRoute] int id)
         {
             bool removido = clienteService.Deletar(id);
 
             if (!removido)
             {
-                return "Cliente não encontrado";
+                return NotFound();
             }
 
-            return "Cliente removido";
+            return Ok("Cliente removido");
         }
     }
 }

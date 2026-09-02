@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddSingleton<IClienteRepository, ClienteRepository>();
 
-builder.Services.AddSingleton<ClienteService>();
+builder.Services.AddSingleton<IClienteService, ClienteService>();
 
 builder.Services.AddOpenApi();
 
