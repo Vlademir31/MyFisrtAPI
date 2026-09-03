@@ -1,11 +1,15 @@
 using MyFirstAPI.Repository;
 using MyFirstAPI.Services;
 using MyFirstAPI.Interfaces;
+using MyFirstAPI.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddDbContext<MyFirstApiContext>(options =>  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnections")));
 
 builder.Services.AddControllers();
 
@@ -16,6 +20,7 @@ builder.Services.AddSingleton<IClienteService, ClienteService>();
 builder.Services.AddSingleton<IFuncionarioRepository, FuncionarioRepository>();
 
 builder.Services.AddSingleton<IFuncionarioService, FuncionarioService>();
+
 
 builder.Services.AddOpenApi();
 
