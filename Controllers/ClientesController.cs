@@ -6,7 +6,7 @@ namespace MyFirstAPI.Controllers
 {
     [ApiController]
     [Route("clientes")]
-    public class ClientesController : Controller
+    public class ClientesController : ControllerBase
     {
         private readonly IClienteService clienteService;
         public ClientesController(IClienteService clienteService)
@@ -46,6 +46,8 @@ namespace MyFirstAPI.Controllers
         [Route("{id}")]
         public IActionResult Atualizar( [FromRoute] int id, [FromBody] Cliente clienteAtualizado)
         {
+            clienteAtualizado.Id = id;
+            
             bool atualizado = clienteService.Atualizar(clienteAtualizado);
 
             if (!atualizado)

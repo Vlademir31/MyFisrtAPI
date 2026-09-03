@@ -3,7 +3,6 @@ using MyFirstAPI.Services;
 using MyFirstAPI.Interfaces;
 using MyFirstAPI.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,13 +12,13 @@ builder.Services.AddDbContext<MyFirstApiContext>(options =>  options.UseSqlServe
 
 builder.Services.AddControllers();
 
-builder.Services.AddSingleton<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
-builder.Services.AddSingleton<IClienteService, ClienteService>();
+builder.Services.AddScoped<IClienteService, ClienteService>();
 
-builder.Services.AddSingleton<IFuncionarioRepository, FuncionarioRepository>();
+builder.Services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
 
-builder.Services.AddSingleton<IFuncionarioService, FuncionarioService>();
+builder.Services.AddScoped<IFuncionarioService, FuncionarioService>();
 
 
 builder.Services.AddOpenApi();
