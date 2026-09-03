@@ -13,6 +13,10 @@ builder.Services.AddSingleton<IClienteRepository, ClienteRepository>();
 
 builder.Services.AddSingleton<IClienteService, ClienteService>();
 
+builder.Services.AddSingleton<IFuncionarioRepository, FuncionarioRepository>();
+
+builder.Services.AddSingleton<IFuncionarioService, FuncionarioService>();
+
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
