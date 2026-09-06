@@ -12,6 +12,7 @@ namespace MyFirstAPI.Model
         // = string.Empty(serve para inicializar uma propriedade com uma string vazia)
         [Required]
         [MaxLength(254)]
+        [EmailAddress]
         public string Email { get; set; } = string.Empty;
     }
 }
