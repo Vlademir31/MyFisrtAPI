@@ -13,23 +13,6 @@ namespace MyFirstAPI.Repository
         {
             this.context = context;
         }
-
-        private static List<Cliente> clientes = new List<Cliente>
-       {
-        new Cliente
-            {
-        Id = 1,
-        Nome = "Vlademir",
-        Email = "vlade@email.com"
-    },
-
-    new Cliente
-    {
-        Id = 2,
-        Nome = "Maria",
-        Email = "maria@email.com"
-    }
-};
         public List<Cliente> ObterTodos()
         {
             return context.Clientes.ToList();
