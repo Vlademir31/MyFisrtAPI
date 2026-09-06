@@ -1,10 +1,18 @@
 using MyFirstAPI.Model;
 using MyFirstAPI.Interfaces;
+using MyFirstAPI.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MyFirstAPI.Repository
 {
     public class ClienteRepository : IClienteRepository 
     {
+        private readonly MyFirstApiContext context;
+
+        public ClienteRepository(MyFirstApiContext context)
+        {
+            this.context = context;
+        }
 
         private static List<Cliente> clientes = new List<Cliente>
        {
@@ -24,36 +32,22 @@ namespace MyFirstAPI.Repository
 };
         public List<Cliente> ObterTodos()
         {
-            return clientes;
+            return context.Clientes.ToList();
         }
-        private static int proximoId = 3;
-
+        
         public Cliente? ObterPorId(int id)
         {
-            Cliente? resultado = null;
-
-            foreach (var cliente in clientes)
-            {
-                if (cliente.Id == id)
-                {
-                    resultado = cliente;
-                    break;
-                }
-            }
-            return resultado;
+            return context.Clientes.FirstOrDefault(c => c.Id == id);
         }
         public Cliente Adicionar(Cliente cliente)
         {
-            cliente.Id = proximoId;
-            proximoId++;
-
-            clientes.Add(cliente);
-
+         context.Clientes.Add(cliente);
+         context.SaveChanges();
             return cliente;
         }
         public bool Update (int id, Cliente clienteAtualizado)
         {
-            Cliente? cliente = ObterPorId(id);
+            Cliente? cliente = context.Clientes.FirstOrDefault(c => c.Id == id);
 
             if (cliente == null)
             {
@@ -63,20 +57,23 @@ namespace MyFirstAPI.Repository
             cliente.Nome = clienteAtualizado.Nome;
             cliente.Email = clienteAtualizado.Email;
 
+            context.SaveChanges();
+
             return true;
         }
 
 
         public bool Remover(int id)
         {
-            Cliente? cliente = ObterPorId(id);
+            Cliente? cliente = context.Clientes.FirstOrDefault(c => c.Id == id);
 
             if (cliente == null)
             {
                 return false;
             }
 
-            clientes.Remove(cliente);
+            context.Clientes.Remove(cliente);
+            context.SaveChanges();
 
             return true;
         }
