@@ -44,11 +44,11 @@ namespace MyFirstAPI.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public IActionResult Atualizar( [FromRoute] int id, [FromBody] Cliente clienteAtualizado)
+        public IActionResult Update( [FromRoute] int id, [FromBody] Cliente clienteUpdate)
         {
-            clienteAtualizado.Id = id;
+            clienteUpdate.Id = id;
             
-            bool atualizado = clienteService.Atualizar(clienteAtualizado);
+            bool atualizado = clienteService.Update(clienteUpdate);
 
             if (!atualizado)
             {

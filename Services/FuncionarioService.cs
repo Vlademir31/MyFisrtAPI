@@ -28,9 +28,9 @@ namespace MyFirstAPI.Services
             return repository.Adicionar(funcionario);
         }
 
-        public bool Atualizar(Funcionario funcionario)
+        public bool Update(Funcionario funcionario)
         {
-            return repository.Atualizar(funcionario.Id, funcionario);
+            return repository.Update(funcionario.Id, funcionario);
         }
 
         public bool Deletar(int id)

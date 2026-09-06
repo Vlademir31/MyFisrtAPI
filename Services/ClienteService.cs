@@ -23,9 +23,9 @@ namespace MyFirstAPI.Services
             return repository.Adicionar(cliente);
         }
 
-        public bool Atualizar(Cliente cliente)
+        public bool Update(Cliente cliente)
         {
-            return repository.Atualizar(cliente.Id, cliente);
+            return repository.Update(cliente.Id, cliente);
         }
         public bool Deletar(int id)
         {

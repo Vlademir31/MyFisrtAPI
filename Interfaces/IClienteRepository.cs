@@ -10,7 +10,7 @@ namespace MyFirstAPI.Interfaces
 
         Cliente Adicionar(Cliente cliente);
 
-        bool Atualizar ( int id, Cliente cliente);
+        bool Update ( int id, Cliente cliente);
 
         bool Remover (int id);
         

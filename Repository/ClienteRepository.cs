@@ -51,7 +51,7 @@ namespace MyFirstAPI.Repository
 
             return cliente;
         }
-        public bool Atualizar (int id, Cliente clienteAtualizado)
+        public bool Update (int id, Cliente clienteAtualizado)
         {
             Cliente? cliente = ObterPorId(id);
 

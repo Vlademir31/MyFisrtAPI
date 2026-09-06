@@ -45,15 +45,15 @@ namespace MyFirstAPI.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public IActionResult Atualizar(
+        public IActionResult Update(
             [FromRoute] int id,
-            [FromBody] Funcionario funcionarioAtualizado)
+            [FromBody] Funcionario funcionarioUpdate)
         {
-            funcionarioAtualizado.Id = id;
+            funcionarioUpdate.Id = id;
 
-            bool atualizado = funcionarioService.Atualizar(funcionarioAtualizado);
+            bool Update = funcionarioService.Update(funcionarioUpdate);
 
-            if (!atualizado)
+            if (!Update)
             {
                 return NotFound();
             }

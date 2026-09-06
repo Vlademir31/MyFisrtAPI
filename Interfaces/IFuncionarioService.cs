@@ -11,7 +11,7 @@ namespace MyFirstAPI.Interfaces
 
         Funcionario Adicionar(Funcionario funcionario );
 
-        bool Atualizar(Funcionario funcionario);
+        bool Update(Funcionario funcionario);
 
         bool Deletar(int id);
     }
