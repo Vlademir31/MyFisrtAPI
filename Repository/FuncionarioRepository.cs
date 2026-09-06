@@ -56,7 +56,18 @@ namespace MyFirstAPI.Repository
 
         public bool Remover(int id)
         {
-            return false;
+            Funcionario? funcionario = context.Funcionarios.FirstOrDefault(f => f.Id == id);
+
+            if (funcionario == null)
+            {
+                return false;
+            }
+           
+            context.Funcionarios.Remove(funcionario);
+
+               context.SaveChanges();
+
+               return true;
         }
     }
 }
