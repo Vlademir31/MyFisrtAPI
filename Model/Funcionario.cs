@@ -15,6 +15,7 @@ namespace MyFirstAPI.Model
         public string Cpf { get; set; } = string.Empty;
         
         [MaxLength(254)]
+        [EmailAddress]
         public string Email { get; set; } = string.Empty;
 
         [MaxLength(20)]
