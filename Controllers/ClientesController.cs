@@ -68,7 +68,7 @@ namespace MyFirstAPI.Controllers
                 return NotFound();
             }
 
-            return Ok("Cliente removido");
+            return NoContent();
         }
     }
 }
