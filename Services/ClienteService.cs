@@ -10,26 +10,26 @@ namespace MyFirstAPI.Services
         {
             this.repository = repository;
         }
-        public IEnumerable<Cliente> ObterTodos()
+        public async Task<IEnumerable<Cliente>> ObterTodosAsync()
         {
-            return repository.ObterTodos();
+            return await repository.ObterTodosAsync();
         }
-        public Cliente? ObterPorId(int id)
+        public async Task<Cliente?> ObterPorIdAsync(int id)
         {
-            return repository.ObterPorId(id);
+            return await repository.ObterPorIdAsync(id);
         }
-        public Cliente Adicionar(Cliente cliente)
+        public async Task<Cliente>  AdicionarAsync(Cliente cliente)
         {
-            return repository.Adicionar(cliente);
+            return await repository.AdicionarAsync(cliente);
         }
 
-        public bool Update(Cliente cliente)
+        public async Task<bool> UpdateAsync(Cliente cliente)
         {
-            return repository.Update(cliente.Id, cliente);
+            return await repository.UpdateAsync(cliente.Id, cliente);
         }
-        public bool Deletar(int id)
+        public async Task<bool> DeletarAsync(int id)
         {
-            return repository.Remover(id);
+            return await repository.DeletarAsync(id);
         }
     }
 }

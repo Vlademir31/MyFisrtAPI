@@ -12,7 +12,7 @@ namespace MyFirstAPI.Interfaces
 
         Task<bool> UpdateAsync (int id, Cliente cliente);
 
-        Task<bool> RemoverAsync (int id);
+        Task<bool> DeletarAsync (int id);
         
     }
 }

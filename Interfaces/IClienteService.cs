@@ -4,14 +4,14 @@ namespace MyFirstAPI.Interfaces
 {
     public interface IClienteService
     {
-       IEnumerable<Cliente> ObterTodos();
+       Task<IEnumerable<Cliente>> ObterTodosAsync();
 
-        Cliente? ObterPorId(int id);
+        Task<Cliente?> ObterPorIdAsync(int id);
 
-        Cliente Adicionar(Cliente cliente);
+        Task<Cliente> AdicionarAsync(Cliente cliente);
 
-        bool Update(Cliente cliente);
+        Task<bool> UpdateAsync(Cliente cliente);
 
-        bool Deletar(int id);
+        Task<bool> DeletarAsync(int id);
     }
 }

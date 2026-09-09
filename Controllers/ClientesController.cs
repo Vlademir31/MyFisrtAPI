@@ -15,17 +15,17 @@ namespace MyFirstAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult ObterTodos()
+        public async Task<IActionResult> ObterTodosAsync()
         {
-            return Ok (clienteService.ObterTodos());
+            return Ok (await clienteService.ObterTodosAsync());
         }
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult ObterPorId([FromRoute] int id)
+        public async Task<IActionResult> ObterPorIdAsync([FromRoute] int id)
         {
             
-            Cliente? cliente = clienteService.ObterPorId(id);
+            Cliente? cliente = await clienteService.ObterPorIdAsync(id);
 
             if (cliente == null)
             {
@@ -36,19 +36,19 @@ namespace MyFirstAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Criar([FromBody] Cliente cliente)
+        public async Task<IActionResult> CriarAsync([FromBody] Cliente cliente)
         {
-            Cliente novoCliente = clienteService.Adicionar(cliente);
+            Cliente novoCliente = await clienteService.AdicionarAsync(cliente);
             return Created("", novoCliente);
         }
 
         [HttpPut]
         [Route("{id}")]
-        public IActionResult Update( [FromRoute] int id, [FromBody] Cliente clienteUpdate)
+        public async Task<IActionResult> UpdateAsync( [FromRoute] int id, [FromBody] Cliente clienteUpdate)
         {
             clienteUpdate.Id = id;
             
-            bool atualizado = clienteService.Update(clienteUpdate);
+            bool atualizado = await clienteService.UpdateAsync(clienteUpdate);
 
             if (!atualizado)
             {
@@ -59,9 +59,9 @@ namespace MyFirstAPI.Controllers
         }
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult Deletar ([FromRoute] int id)
+        public async Task<IActionResult> Deletar ([FromRoute] int id)
         {
-            bool removido = clienteService.Deletar(id);
+            bool removido = await clienteService.DeletarAsync(id);
 
             if (!removido)
             {

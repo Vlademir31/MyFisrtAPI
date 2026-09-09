@@ -41,13 +41,13 @@ namespace MyFirstAPI.Repository
             cliente.Nome = clienteAtualizado.Nome;
             cliente.Email = clienteAtualizado.Email;
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             return true;
         }
 
 
-        public async Task<bool> RemoverAsync(int id)
+        public async Task<bool> DeletarAsync(int id)
         {
             Cliente? cliente = await context.Clientes.FirstOrDefaultAsync(c => c.Id == id);
 
