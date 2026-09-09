@@ -39,7 +39,7 @@ namespace MyFirstAPI.Controllers
         public async Task<IActionResult> CriarAsync([FromBody] Cliente cliente)
         {
             Cliente novoCliente = await clienteService.AdicionarAsync(cliente);
-            return Created("", novoCliente);
+            return CreatedAtAction("ObterPorId", new { id = novoCliente.Id }, novoCliente);
         }
 
         [HttpPut]
