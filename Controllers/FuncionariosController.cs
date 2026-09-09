@@ -41,7 +41,7 @@ namespace MyFirstAPI.Controllers
         {
             Funcionario novoFuncionario = await funcionarioService.AdicionarAsync(funcionario);
 
-            return Created("", novoFuncionario);
+            return CreatedAtAction("ObterPorId", new { id = novoFuncionario.Id }, novoFuncionario);
         }
 
         [HttpPut]
@@ -73,7 +73,7 @@ namespace MyFirstAPI.Controllers
                 return NotFound();
             }
 
-            return Ok("Funcionário removido");
+            return NoContent();
         }
     }
 }
