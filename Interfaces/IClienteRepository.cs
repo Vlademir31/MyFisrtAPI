@@ -4,15 +4,15 @@ namespace MyFirstAPI.Interfaces
 {
     public interface IClienteRepository
     {
-        List<Cliente> ObterTodos();
+        Task<List<Cliente>> ObterTodosAsync();
 
-        Cliente? ObterPorId(int Id);
+       Task<Cliente?>  ObterPorIdAsync(int Id);
 
-        Cliente Adicionar(Cliente cliente);
+        Task<Cliente> AdicionarAsync(Cliente cliente);
 
-        bool Update ( int id, Cliente cliente);
+        Task<bool> UpdateAsync (int id, Cliente cliente);
 
-        bool Remover (int id);
+        Task<bool> RemoverAsync (int id);
         
     }
 }

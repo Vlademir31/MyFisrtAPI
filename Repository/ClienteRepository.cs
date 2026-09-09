@@ -13,24 +13,25 @@ namespace MyFirstAPI.Repository
         {
             this.context = context;
         }
-        public List<Cliente> ObterTodos()
+        public Task<List<Cliente>> ObterTodosAsync()
         {
-            return context.Clientes.ToList();
+            return context.Clientes.ToListAsync();
         }
         
-        public Cliente? ObterPorId(int id)
+        public Task<Cliente?> ObterPorIdAsync(int id)
         {
-            return context.Clientes.FirstOrDefault(c => c.Id == id);
+            return context.Clientes.FirstOrDefaultAsync(c => c.Id == id);
         }
-        public Cliente Adicionar(Cliente cliente)
+        public async Task<Cliente> AdicionarAsync(Cliente cliente)
         {
          context.Clientes.Add(cliente);
-         context.SaveChanges();
+         await context.SaveChangesAsync();
+
             return cliente;
         }
-        public bool Update (int id, Cliente clienteAtualizado)
+        public async Task<bool> UpdateAsync (int id, Cliente clienteAtualizado)
         {
-            Cliente? cliente = context.Clientes.FirstOrDefault(c => c.Id == id);
+            Cliente? cliente = await context.Clientes.FirstOrDefaultAsync(c => c.Id == id);
 
             if (cliente == null)
             {
@@ -46,9 +47,9 @@ namespace MyFirstAPI.Repository
         }
 
 
-        public bool Remover(int id)
+        public async Task<bool> RemoverAsync(int id)
         {
-            Cliente? cliente = context.Clientes.FirstOrDefault(c => c.Id == id);
+            Cliente? cliente = await context.Clientes.FirstOrDefaultAsync(c => c.Id == id);
 
             if (cliente == null)
             {
@@ -56,7 +57,7 @@ namespace MyFirstAPI.Repository
             }
 
             context.Clientes.Remove(cliente);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             return true;
         }
