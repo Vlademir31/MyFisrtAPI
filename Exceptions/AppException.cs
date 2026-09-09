@@ -1,9 +1,8 @@
-
 namespace MyFirstAPI.Exceptions
 {
-    public class ClienteNaoEncontradoException : AppException
+    public class AppException : Exception
     {
-        public ClienteNaoEncontradoException(string message) : base(message)
+        public AppException(string message) : base(message)
         {
             
         }
