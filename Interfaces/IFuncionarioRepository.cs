@@ -5,14 +5,14 @@ namespace MyFirstAPI.Interfaces
 {
     public interface IFuncionarioRepository
     {
-        List<Funcionario> ObterTodos();
+        Task<List<Funcionario>> ObterTodosAsync();
 
-        Funcionario? ObterPorId(int id);
+       Task<Funcionario?> ObterPorIdAsync(int id);
 
-        Funcionario Adicionar(Funcionario funcionario);
+        Task<Funcionario> AdicionarAsync(Funcionario funcionario);
 
-        bool Update(int id, Funcionario funcionario);
+        Task<bool> UpdateAsync(int id, Funcionario funcionario);
 
-        bool Remover(int id);
+        Task<bool> DeletarAsync(int id);
     }
 }

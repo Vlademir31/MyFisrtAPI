@@ -13,29 +13,29 @@ namespace MyFirstAPI.Services
             this.repository = repository;
         }
 
-        public IEnumerable<Funcionario> ObterTodos()
+        public async Task<IEnumerable<Funcionario>> ObterTodosAsync()
         {
-            return repository.ObterTodos();
+            return await repository.ObterTodosAsync();
         }
 
-        public Funcionario? ObterPorId(int id)
+        public async Task<Funcionario?> ObterPorIdAsync(int id)
         {
-            return repository.ObterPorId(id);
+            return await  repository.ObterPorIdAsync(id);
         }
 
-        public Funcionario Adicionar(Funcionario funcionario)
+        public async Task<Funcionario> AdicionarAsync(Funcionario funcionario)
         {
-            return repository.Adicionar(funcionario);
+            return await repository.AdicionarAsync(funcionario);
         }
 
-        public bool Update(Funcionario funcionario)
+        public async Task<bool> UpdateAsync(Funcionario funcionario)
         {
-            return repository.Update(funcionario.Id, funcionario);
+            return await  repository.UpdateAsync(funcionario.Id, funcionario);
         }
 
-        public bool Deletar(int id)
+        public async Task<bool> DeletarAsync(int id)
         {
-            return repository.Remover(id);
+            return await repository.DeletarAsync(id);
         }
     }
 }

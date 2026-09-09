@@ -14,26 +14,26 @@ namespace MyFirstAPI.Repository
             this.context = context;
         }
 
-        public List<Funcionario> ObterTodos()
+        public Task<List<Funcionario>>  ObterTodosAsync()
         {
-            return context.Funcionarios.ToList();
+            return context.Funcionarios.ToListAsync();
         }
 
-        public Funcionario? ObterPorId(int id)
+        public Task<Funcionario?> ObterPorIdAsync(int id)
         {
-            return context.Funcionarios.FirstOrDefault(f => f.Id ==id);
+            return context.Funcionarios.FirstOrDefaultAsync(f => f.Id ==id);
         }
 
-        public Funcionario Adicionar(Funcionario funcionario)
+        public async Task<Funcionario> AdicionarAsync(Funcionario funcionario)
         {
             context.Funcionarios.Add(funcionario);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
             return funcionario;
         }
 
-        public bool Update(int id, Funcionario funcionarioUpdate)
+        public async Task<bool> UpdateAsync(int id, Funcionario funcionarioUpdate)
         {
-            Funcionario? funcionario = context.Funcionarios.FirstOrDefault(f => f.Id == id);
+            Funcionario? funcionario = await context.Funcionarios.FirstOrDefaultAsync(f => f.Id == id);
 
             if(funcionario == null)
             {
@@ -49,14 +49,14 @@ namespace MyFirstAPI.Repository
             funcionario.DataAdmissao = funcionarioUpdate.DataAdmissao;
             funcionario.Ativo = funcionarioUpdate.Ativo;
 
-            context.SaveChanges();
+           await context.SaveChangesAsync();
 
             return true;
         }
 
-        public bool Remover(int id)
+        public async Task<bool> DeletarAsync(int id)
         {
-            Funcionario? funcionario = context.Funcionarios.FirstOrDefault(f => f.Id == id);
+            Funcionario? funcionario = await context.Funcionarios.FirstOrDefaultAsync(f => f.Id == id);
 
             if (funcionario == null)
             {
@@ -65,7 +65,7 @@ namespace MyFirstAPI.Repository
            
             context.Funcionarios.Remove(funcionario);
 
-               context.SaveChanges();
+              await context.SaveChangesAsync();
 
                return true;
         }

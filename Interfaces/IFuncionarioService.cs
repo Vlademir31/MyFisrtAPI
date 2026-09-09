@@ -5,14 +5,14 @@ namespace MyFirstAPI.Interfaces
 {
     public interface IFuncionarioService
     {
-        IEnumerable<Funcionario> ObterTodos();
+        Task<IEnumerable<Funcionario>> ObterTodosAsync();
 
-        Funcionario? ObterPorId(int id);
+        Task<Funcionario?> ObterPorIdAsync(int id);
 
-        Funcionario Adicionar(Funcionario funcionario );
+        Task<Funcionario> AdicionarAsync(Funcionario funcionario );
 
-        bool Update(Funcionario funcionario);
+        Task<bool> UpdateAsync(Funcionario funcionario);
 
-        bool Deletar(int id);
+        Task<bool> DeletarAsync(int id);
     }
 }
