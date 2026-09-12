@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http;
+using MyFirstAPI.Exceptions;
 
 namespace MyFirstAPI.Migrations
 {
@@ -11,7 +12,23 @@ namespace MyFirstAPI.Migrations
         }
         public async Task InvokeAsync(HttpContext context)
         {
-            await next(context);
+            try
+            {
+                await next(context);
+            }
+
+            catch (ClienteNaoEncontradoException ex)
+            {
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
+                await context.Response.WriteAsync (ex.Message);
+            }
+
+            catch (FuncionarioNaoEncontradoException ex)
+            {
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
+                await context.Response.WriteAsync (ex.Message);
+            }
         }
+        
     }
 }
