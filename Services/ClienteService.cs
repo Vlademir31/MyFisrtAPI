@@ -1,5 +1,6 @@
 using MyFirstAPI.Model;
 using MyFirstAPI.Interfaces;
+using MyFirstAPI.Exceptions;
 
 namespace MyFirstAPI.Services
 {
@@ -14,9 +15,15 @@ namespace MyFirstAPI.Services
         {
             return await repository.ObterTodosAsync();
         }
-        public async Task<Cliente?> ObterPorIdAsync(int id)
+        public async Task<Cliente> ObterPorIdAsync(int id)
         {
-            return await repository.ObterPorIdAsync(id);
+            var cliente = await repository.ObterPorIdAsync(id);
+
+            if (cliente is null)
+            {
+                throw new ClienteNaoEncontradoException("Cliente não encontrado.");
+            }
+            return cliente;
         }
         public async Task<Cliente>  AdicionarAsync(Cliente cliente)
         {

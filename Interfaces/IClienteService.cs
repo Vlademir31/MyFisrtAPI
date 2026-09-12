@@ -6,7 +6,7 @@ namespace MyFirstAPI.Interfaces
     {
        Task<IEnumerable<Cliente>> ObterTodosAsync();
 
-        Task<Cliente?> ObterPorIdAsync(int id);
+        Task<Cliente> ObterPorIdAsync(int id);
 
         Task<Cliente> AdicionarAsync(Cliente cliente);
 
