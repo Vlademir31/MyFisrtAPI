@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using MyFirstAPI.Exceptions;
 
-namespace MyFirstAPI.Migrations
+namespace MyFirstAPI.Middleware
 {
     public class ExceptionMiddleware
     {
@@ -27,6 +27,12 @@ namespace MyFirstAPI.Migrations
             {
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
                 await context.Response.WriteAsync (ex.Message);
+            }
+
+            catch (Exception)
+            {
+                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                await context.Response.WriteAsync("Ocorreu um erro interno no servidor.");
             }
         }
         
