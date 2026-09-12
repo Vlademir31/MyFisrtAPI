@@ -3,6 +3,7 @@ using MyFirstAPI.Services;
 using MyFirstAPI.Interfaces;
 using MyFirstAPI.Data;
 using Microsoft.EntityFrameworkCore;
+using MyFirstAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,8 @@ builder.Services.AddScoped<IFuncionarioService, FuncionarioService>();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapOpenApi();
 
