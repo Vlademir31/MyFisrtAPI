@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Http;
 using MyFirstAPI.Exceptions;
 
 namespace MyFirstAPI.Middleware
