@@ -32,11 +32,25 @@ namespace MyFirstAPI.Services
 
         public async Task<bool> UpdateAsync(Cliente cliente)
         {
-            return await repository.UpdateAsync(cliente.Id, cliente);
+            bool atualizado = await repository.UpdateAsync(cliente.Id, cliente);
+
+            if (!atualizado)
+            {
+                throw new ClienteNaoEncontradoException ("Cliente não encontrado.");
+            }
+
+            return true;
         }
         public async Task<bool> DeletarAsync(int id)
         {
-            return await repository.DeletarAsync(id);
+            bool removido = await repository.DeletarAsync(id);
+
+            if (!removido)
+            {
+                throw new ClienteNaoEncontradoException("Clente não encontrado.");
+            }
+
+            return true;
         }
     }
 }
