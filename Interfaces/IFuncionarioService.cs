@@ -7,7 +7,7 @@ namespace MyFirstAPI.Interfaces
     {
         Task<IEnumerable<Funcionario>> ObterTodosAsync();
 
-        Task<Funcionario?> ObterPorIdAsync(int id);
+        Task<Funcionario> ObterPorIdAsync(int id);
 
         Task<Funcionario> AdicionarAsync(Funcionario funcionario );
 
