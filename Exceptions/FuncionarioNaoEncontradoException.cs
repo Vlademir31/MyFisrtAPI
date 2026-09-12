@@ -2,7 +2,7 @@ namespace MyFirstAPI.Exceptions
 {
     public class FuncionarioNaoEncontradoException : AppException
     {
-        public FuncionarioNaoEncontradoException(string mesage) : base(mesage)
+        public FuncionarioNaoEncontradoException(string message) : base(message)
         {
             
         }
