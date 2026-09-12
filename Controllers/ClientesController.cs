@@ -25,12 +25,7 @@ namespace MyFirstAPI.Controllers
         public async Task<IActionResult> ObterPorIdAsync([FromRoute] int id)
         {
             
-            Cliente? cliente = await clienteService.ObterPorIdAsync(id);
-
-            if (cliente == null)
-            {
-                return NotFound();
-            }
+            Cliente cliente = await clienteService.ObterPorIdAsync(id);
 
             return Ok (cliente);
         }
